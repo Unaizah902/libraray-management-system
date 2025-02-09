@@ -6,6 +6,15 @@
 <div class="container mx-auto p-6">
     <h1 class="text-3xl font-bold text-center mb-6 text-white">📚 Digital Library</h1>
 
+    <!-- Search Bar -->
+    <form method="GET" action="{{ url_for('routes.home') }}" class="mb-6">
+        <input type="text" name="q" placeholder="Search for a book..."
+               class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500">
+        <button type="submit" class="mt-2 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Search
+        </button>
+    </form>
+
     {% if books %}
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {% for book in books %}
@@ -21,11 +30,13 @@
                     </p>
                     <div class="mt-4">
                         {% if book.is_borrowed %}
-                            <a href="{{ url_for('routes.return_book', book_id=book.id) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ url_for('routes.return_book', book_id=book.id) }}"
+                               class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                 Return
                             </a>
                         {% else %}
-                            <a href="{{ url_for('routes.borrow_book', book_id=book.id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ url_for('routes.borrow_book', book_id=book.id) }}"
+                               class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                                 Borrow
                             </a>
                         {% endif %}

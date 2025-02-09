@@ -12,7 +12,11 @@ routes = Blueprint('routes', __name__)
 @routes.route('/')
 @login_required
 def home():
-    books = Book.query.all()
+    search_query = request.args.get('q', '')
+    if search_query:
+        books = Book.query.filter(Book.title.ilike(f'%{search_query}%')).all()
+    else:
+        books = Book.query.all()
     return render_template('home.html', books=books)
 
 
