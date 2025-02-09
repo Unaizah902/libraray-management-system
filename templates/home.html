@@ -10,9 +10,9 @@
             <li>{{ book.title }} by {{ book.author }}
                 {% if book.is_borrowed %}
                     (Borrowed)
-                    <a href="{{ url_for('return_book', book_id=book.id) }}">Return</a>
+                    <a href="{{ url_for('routes.return_book', book_id=book.id) }}">Return</a>
                 {% else %}
-                    <a href="{{ url_for('borrow_book', book_id=book.id) }}">Borrow</a>
+                    <a href="{{ url_for('routes.borrow_book', book_id=book.id) }}">Borrow</a>
                 {% endif %}
             </li>
         {% endfor %}
