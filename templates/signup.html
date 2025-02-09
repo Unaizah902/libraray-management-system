@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Signup</title>
-</head>
-<body>
-    <h2>Signup</h2>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Sign Up</button>
+{% extends "base.html" %}
+{% block title %}Sign Up - Digital Library{% endblock %}
+{% block content %}
+<div class="bg-gray-800 shadow-lg rounded-lg px-8 py-6">
+    <h2 class="text-2xl font-bold text-center mb-4">Sign Up</h2>
+    <form method="POST" action="{{ url_for('routes.signup') }}">
+        <input type="text" name="username" placeholder="Username"
+            class="w-full px-4 py-2 mb-4 bg-gray-700 border-none text-white rounded">
+        <input type="email" name="email" placeholder="Email"
+            class="w-full px-4 py-2 mb-4 bg-gray-700 border-none text-white rounded">
+        <input type="password" name="password" placeholder="Password"
+            class="w-full px-4 py-2 mb-4 bg-gray-700 border-none text-white rounded">
+        <button type="submit"
+            class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Sign Up
+        </button>
     </form>
-    <p>Already have an account? <a href="{{ url_for('routes.login') }}">Login</a></p>
-</body>
-</html>
+    <p class="text-sm text-center mt-4">Already have an account?
+        <a href="{{ url_for('routes.login') }}" class="text-blue-400 hover:underline">Login</a>
+    </p>
+</div>
+{% endblock %}

@@ -3,24 +3,38 @@
 {% block title %}Home - Digital Library{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="mb-4 text-center">📖 Available Books</h1>
-    <div class="row">
-        {% for book in books %}
-            <div class="col-md-4 mb-3">
-                <div class="card bg-secondary text-light">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ book.title }}</h5>
-                        <p class="card-text">Author: {{ book.author }}</p>
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold text-center mb-6 text-white">📚 Digital Library</h1>
+
+    {% if books %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {% for book in books %}
+                <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                    <h2 class="text-xl font-semibold text-white">{{ book.title }}</h2>
+                    <p class="text-gray-400">Author: {{ book.author }}</p>
+                    <p class="text-gray-400">Status:
                         {% if book.is_borrowed %}
-                            <button class="btn btn-danger" disabled>Borrowed</button>
+                            <span class="text-red-400">Borrowed</span>
                         {% else %}
-                            <a href="{{ url_for('routes.borrow_book', book_id=book.id) }}" class="btn btn-primary">Borrow</a>
+                            <span class="text-green-400">Available</span>
+                        {% endif %}
+                    </p>
+                    <div class="mt-4">
+                        {% if book.is_borrowed %}
+                            <a href="{{ url_for('routes.return_book', book_id=book.id) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                Return
+                            </a>
+                        {% else %}
+                            <a href="{{ url_for('routes.borrow_book', book_id=book.id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                Borrow
+                            </a>
                         {% endif %}
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-gray-400 text-center">No books available.</p>
+    {% endif %}
 </div>
 {% endblock %}

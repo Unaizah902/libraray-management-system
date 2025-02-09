@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
+{% extends "base.html" %}
+{% block title %}Login - Digital Library{% endblock %}
+{% block content %}
+<div class="bg-gray-800 shadow-lg rounded-lg px-8 py-6">
+    <h2 class="text-2xl font-bold text-center mb-4">Login</h2>
+    <form method="POST" action="{{ url_for('routes.login') }}">
+        <input type="text" name="username" placeholder="Username"
+            class="w-full px-4 py-2 mb-4 bg-gray-700 border-none text-white rounded">
+        <input type="password" name="password" placeholder="Password"
+            class="w-full px-4 py-2 mb-4 bg-gray-700 border-none text-white rounded">
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Login
+        </button>
     </form>
-    <p>Don't have an account? <a href="{{ url_for('routes.signup') }}">Sign Up</a></p>
-</body>
-</html>
+    <p class="text-sm text-center mt-4">Don't have an account?
+        <a href="{{ url_for('routes.signup') }}" class="text-blue-400 hover:underline">Sign up</a>
+    </p>
+</div>
+{% endblock %}
