@@ -1,21 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Digital Library</title>
-</head>
-<body>
-    <h1>Library Books</h1>
-    <ul>
+{% extends "base.html" %}
+
+{% block title %}Home - Digital Library{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4 text-center">📖 Available Books</h1>
+    <div class="row">
         {% for book in books %}
-            <li>{{ book.title }} by {{ book.author }}
-                {% if book.is_borrowed %}
-                    (Borrowed)
-                    <a href="{{ url_for('routes.return_book', book_id=book.id) }}">Return</a>
-                {% else %}
-                    <a href="{{ url_for('routes.borrow_book', book_id=book.id) }}">Borrow</a>
-                {% endif %}
-            </li>
+            <div class="col-md-4 mb-3">
+                <div class="card bg-secondary text-light">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text">Author: {{ book.author }}</p>
+                        {% if book.is_borrowed %}
+                            <button class="btn btn-danger" disabled>Borrowed</button>
+                        {% else %}
+                            <a href="{{ url_for('routes.borrow_book', book_id=book.id) }}" class="btn btn-primary">Borrow</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </div>
+</div>
+{% endblock %}
